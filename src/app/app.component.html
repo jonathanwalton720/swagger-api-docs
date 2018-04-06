@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2"></div>
+    <div class="col-sm-3 col-md-2 sidebar">
+      <h1 class="logo"><img src="/assets/logo.png" class="img-responsive" alt="site logo"></h1>
+      <h3>API Reference</h3>
+      <ul class="nav nav-sidebar">
+      <!-- sidenav content -->
+        <li>
+          <a routerLink="/" fragment="summary">Summary</a>
+        </li>
+        <li>
+          <a routerLink="/" fragment="authentication">Authentication</a>
+        </li>
+        <li>
+          <a routerLink="/" fragment="date-time">DateTime</a>
+        </li>
+        <li>
+          <a routerLink="/" fragment="webhooks">Outbound WebHooks</a>
+        </li>
+        <li>
+          <a routerLink="/" fragment="paging">Paging</a>
+        </li>
+      </ul>
+      <div *ngIf="swagger != null">
+        <h3>Operations</h3>
+        <div *ngFor="let tag of tags">
+          <ul class="nav nav-sidebar">
+            <li>
+              <a routerLink="/v1/{{tag.name}}">{{tag.name}}</a>
+              <!-- TODO: add paths with tag and list here with link to fragment -->
+            </li>
+          </ul>
+        </div>
+        <h3>Resources</h3>
+        <div *ngFor="let title of (swagger.definitions | keys).sort()">
+          <ul class="nav nav-sidebar">
+            <li>
+              <a routerLink="/definitions/{{title}}">{{title}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 col-md-10">
+      <div class="example-box"></div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

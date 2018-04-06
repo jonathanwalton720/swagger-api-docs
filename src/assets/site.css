@@ -1,0 +1,27 @@
+
+h1 {
+    padding: 20px 0 30px;
+}
+
+h5, .required {
+    font-weight: bold;
+    color:#386ec4;
+}
+
+pre {
+    padding: 0;
+}
+
+thead {
+    font-weight: bold;
+}
+
+.sidebar {
+    position: fixed;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.operation {
+    padding-bottom: 50px;
+}

@@ -1,0 +1,81 @@
+<h1>
+  {{ tag.name }}
+</h1>
+<div>
+  <div *ngFor="let path of paths" class="row operation">
+    <div class="col-md-5">
+      <h3>{{path.value.summary}}</h3>
+      <p>{{path.value.description}}</p>
+      <h5>Parameters</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Parameter</td>
+            <td>Name</td>
+            <td>Type</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let parameter of path.value.parameters">
+            <td>{{parameter.in}}</td>
+            <td>{{parameter.name}} <span class="required" data-toggle="tooltip" title="Required" *ngIf="parameter.required">*</span></td>
+            <td>
+              <div>
+                  <a *ngIf="parameter.schema && parameter.schema.$ref" routerLink="{{parameter.schema.$ref.substr(1)}}">
+                    <span>{{parameter | describeType}}</span>
+                  </a>
+                <span *ngIf="!parameter.schema">{{parameter | describeType}}</span>
+              </div>
+              <div class="text-muted">{{parameter.description}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-muted" colspan="3">
+              <span class="required" data-toggle="tooltip" title="Required">*</span> required
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <h5>Responses</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Status Code</td>
+            <td>Returns</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let responseKey of path.value.responses | keys;">
+            <td>{{responseKey}} - {{path.value.responses[responseKey].description}}</td>
+            <td>
+              <a *ngIf="path.value.responses[responseKey].schema && path.value.responses[responseKey].schema.type == 'array'" routerLink="{{path.value.responses[responseKey].schema.items.$ref.substr(1)}}">
+                <span>{{path.value.responses[responseKey].schema | describeType}}</span>
+              </a>
+              <a *ngIf="path.value.responses[responseKey].schema && path.value.responses[responseKey].schema.$ref" routerLink="{{path.value.responses[responseKey].schema.$ref.substr(1)}}">
+                <span>{{path.value.responses[responseKey].schema | describeType}}</span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-7" highlight-js-content>
+      <div>
+        <h5>Example Request</h5>
+        <p>
+          <span class="badge badge-primary text-uppercase">{{path.method}}</span>
+          {{baseUrl + path.url}}{{path.value | exampleUrl}}
+        </p>
+        <pre *ngIf="getRequestParameters(path.value.parameters)"><code class="http">{{getRequestParameters(path.value.parameters) | mockObject | customJson}}</code></pre>
+      </div>
+      <br />
+      <div *ngIf="getResponseParameters(path.value.responses)">
+        <h5>Example Response</h5>
+        <pre *ngIf="path.value.responses[200] && path.value.responses[200].schema.type !== 'array'"><code class="http">{{getResponseParameters(path.value.responses) | mockObject | customJson}}</code></pre>
+        <pre *ngIf="path.value.responses[200] && path.value.responses[200].schema.type === 'array'"><code class="http">[{{getResponseParameters(path.value.responses) | mockObject | customJson}}]</code></pre>
+      </div>
+    </div>
+  </div>
+</div>

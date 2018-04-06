@@ -1,0 +1,55 @@
+<h1>
+  {{ definitionName }}
+</h1>
+<div *ngIf="definition" highlight-js-content>
+  <div class="row">
+    <div class="col-md-5">
+      <p>{{definition.description}}</p>
+      <h5>Properties</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <td>
+              Property
+            </td>
+            <td>
+              Description
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let field of definition.properties | keys">
+            <td>
+              {{field}}
+            </td>
+            <td>
+              <div>
+                <!-- When property is an object (property has $ref) -->
+                <span *ngIf="definition.properties[field].$ref">
+                  <a routerLink="{{definition.properties[field].$ref.substr(1)}}">{{definition.properties[field] | describeType}}</a>
+                </span>
+                <!-- When property is an array of objects (property.items has $ref) -->
+                <span *ngIf="definition.properties[field].type === 'array' && definition.properties[field].items.$ref">
+                  <a routerLink="{{definition.properties[field].items.$ref.substr(1)}}">{{definition.properties[field] | describeType}}</a>
+                </span>
+                <!-- When property is not an object and not an array of objects (no $ref) -->
+                <span *ngIf="!definition.properties[field].$ref && !(definition.properties[field].type === 'array' && definition.properties[field].items.$ref)" class="text-info">
+                  {{definition.properties[field] | describeType}}
+                </span>
+              </div>
+              <div class="text-muted">
+                <span *ngIf="definition.properties[field].required"><b>Required</b>.</span>
+                <!-- <span *ngIf="!definition.properties[field].required">Optional.</span> -->
+                <span [innerHtml]="definition.properties[field].description | describeType"></span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-7">
+      <h5>Example {{ definitionName }}</h5>
+      <pre><code class="http" [innerHtml]="(definition.properties | mockObject | customJson)"></code></pre>
+    </div>
+  </div>
+</div>

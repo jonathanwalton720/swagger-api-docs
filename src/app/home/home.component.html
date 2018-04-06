@@ -1,0 +1,123 @@
+<h1>
+  Swagger API Docs
+</h1>
+<div highlight-js-content>
+  <h3 id="#summary">Summary</h3>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <strong>RESTful</strong> by nature and returns
+      <strong>JSON</strong> by default.
+      <p>If you have any questions about Swagger API Docs, or the products or services offered, please don't hesitate to
+        contact us.</p>
+    </div>
+    <div class="col-sm-7">
+      <h5>API Endpoint</h5>
+      <pre><code class="http">{{apiEndpoint}}</code></pre>
+    </div>
+  </div>
+  <h3 id="#authentication">Authentication</h3>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Each request must be authenticated with your API key. Please contact us to get your API key. Only you should have access
+        to your API key.</p>
+      <p>Include the header parameter
+        <strong>x-api-key</strong> and use your API key to authenticate each request.</p>
+      <p>
+        The
+        <b>Version</b> endpoint can be used to test authentication. The example includes all necessary header information, with
+        the
+        <b>x-api-key</b> header in addition to your standard
+        <b>Accept</b> and
+        <b>Host</b> headers. It will fail if the API key header is missing or not in the correct format.
+      </p>
+      <h5>Possible Responses</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <td>
+              Status Code
+            </td>
+            <td>
+              Returns
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              200 - OK
+            </td>
+            <td>
+              "v1"
+            </td>
+          </tr>
+          <tr>
+            <td>
+              401 - Unauthorized
+            </td>
+            <td>
+              "Key not authorized to access this resource."
+            </td>
+          </tr>
+          <tr>
+            <td>
+              403 - Forbidden
+            </td>
+            <td>
+              "Key not found in header or not correct format."
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-7">
+      <h5>Example Request</h5>
+      <pre><code class="http">GET {{apiEndpoint}}/v1/Version HTTP/1.1
+User-Agent: Fiddler
+Host: {{apiEndpoint.replace(httpRegExp, '')}}
+Accept: application/json
+x-api-key: b2e7ac1f-3efe-4a64-99db-14ebae93ae2b</code></pre>
+    </div>
+  </div>
+  <h3 id="#date-time">DateTime</h3>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>
+        <a href="https://tools.ietf.org/html/rfc3339#section-5.6">Conforming to ISO 8601 standardization</a>, date time objects in the Swagger API Docs are represented by a string
+        as shown in the example.
+      </p>
+    </div>
+    <div class="col-sm-7">
+      <h5>Example DateTime</h5>
+      <pre><code class="http">2018-01-26T22:53:11</code></pre>
+    </div>
+  </div>
+  <h3 id="#paging">Paging</h3>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>
+        The API will return paged results when requesting a list of objects. You may define the
+        <i>page</i> and
+        <i>pageSize</i> parameters when creating a request.
+      </p>
+      <p>
+        The first page will always be 1. The response will include an
+        <strong>x-total-count</strong> header with an integer value to determine how many total items matched the request parameters.
+      </p>
+      <p>
+        The API will only return the number of resources equal to or fewer than the
+        <i>pageSize</i>. The default
+        <i>pageSize</i> is 10.
+      </p>
+    </div>
+    <div class="col-sm-7">
+
+    </div>
+  </div>
+</div>

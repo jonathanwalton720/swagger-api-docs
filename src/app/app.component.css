@@ -1,0 +1,27 @@
+
+a {
+    font-weight: bold;
+    color:#515a97;
+}
+
+.sidebar {
+    border-right: 1px solid #eee;
+    background-color: #f6f6f6;
+}
+
+.example-box {
+    display: block;
+    border-left: 1px solid #eee;
+    background-color: #f6f6f6;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    min-height: 100vh;
+    height: 100%;
+    width: 58.333%;
+}
+
+.logo {
+    padding:0;
+}
